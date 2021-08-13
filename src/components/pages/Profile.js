@@ -1,5 +1,5 @@
 //import React from 'react'
-import { Container, Row, Col, Button, Card, CardBody, CardTitle, CardText, CardFooter } from 'reactstrap'
+import { Container, Row, Col, Button, Card, CardBody, CardTitle, CardFooter } from 'reactstrap'
 
 const Profile = () => {
     return (

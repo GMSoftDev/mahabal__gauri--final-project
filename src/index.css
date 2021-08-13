@@ -6,6 +6,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100% !important;
+  width:100% !important;
+  margin-top: 5%;
+  background: linear-gradient(to bottom,white 5%,lightblue 45%,blue 85%,darkblue 100%);
 }
 
 code {
@@ -13,7 +16,3 @@ code {
     monospace;
 }
 
-#app {
-  height: 100%;
-  min-height: 100vh;
-}

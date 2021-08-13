@@ -6,11 +6,11 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-const Listings = () => {
+const Projects = () => {
     let history = useHistory();
     const token = sessionStorage.getItem('token')
     const user = parseJwt(token).username
-    const [listing, setListing] = useState([])
+    const [projects, setProjects] = useState([])
     const logout = event => {
         event.preventDefault()
         sessionStorage.removeItem('token')
@@ -18,7 +18,7 @@ const Listings = () => {
     }
     useEffect(() => {
         const getData = async () => {
-            const response = await fetch('http://localhost:3001/contact_form/entries', {
+            const response = await fetch('http://localhost:3001/projects/entries', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -26,7 +26,7 @@ const Listings = () => {
             })
             const data = await response.json()
             //console.log(data);
-            setListing(data)
+            setProjects(data)
             //console.log(listing)
         }
         getData()
@@ -34,24 +34,23 @@ const Listings = () => {
     return (
         <Container style={{ paddingTop: "3rem" }}>
             <Row>
-                <h1>Following messages are recieved for {user} </h1>
+                <h1>Following projects are added </h1>
             </Row>
             <Table responsive>
                 <thead>
                     <tr>
                         <th></th>
                         <th>Name</th>
-                        <th>Phone Number</th>
-                        <th>Email</th>
-                        <th>Message</th>
+                        <th>Description</th>
+                        <th>Technology</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {listing.length === 0 &&
-                        <tr><td colSpan="4" className="text-center"><i>No listings found</i></td></tr>
+                    {projects.length === 0 &&
+                        <tr><td colSpan="4" className="text-center"><i>No projects added</i></td></tr>
                     }
-                    {listing.length > 0 &&
-                        listing.map(entry => <tr><td><FontAwesomeIcon icon={faEnvelope} size="lg" color="primary" /></td><td>{entry.name}</td><td>{entry.phone}</td><td>{entry.email}</td><td>{entry.message}</td></tr>)
+                    {projects.length > 0 &&
+                        projects.map((entry, index) => <tr><td>{index + 1}</td><td>{entry.name}</td><td>{entry.description}</td><td>{entry.technology}</td></tr>)
                     }
                 </tbody>
             </Table>
@@ -62,4 +61,4 @@ const Listings = () => {
     )
 }
 
-export default Listings
+export default Projects

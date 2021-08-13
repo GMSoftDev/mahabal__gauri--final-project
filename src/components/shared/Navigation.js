@@ -1,39 +1,43 @@
 //import React, { useState } from 'react'
 import { useState } from 'react'
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Container, Card, CardBody, CardTitle, CardText } from 'reactstrap'
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Container } from 'reactstrap'
 import { NavLink as RouteLink } from 'react-router-dom'
 
 
 
 const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false)
-    const toggle = () => setIsOpen(!isOpen)
+    const toggleLink = () => { isOpen && setIsOpen(!isOpen) }
+    const toggle = () => { setIsOpen(!isOpen) }
 
     return (
-        <Navbar dark color="secondary" bg-navbar expand="md" fixed="top">
+        <Navbar className="navbar-custom" expand="md" fixed="top">
             <Container>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink tag={RouteLink} to="/" onClick={isOpen && toggle}>Home</NavLink>
-                        </NavItem>
-                        {/*                         <NavItem>
-                            <NavLink tag={RouteLink} to="/about" onClick={toggle}>About Me</NavLink>
-                        </NavItem> */}
-                        <NavItem>
-                            <NavLink tag={RouteLink} to="/profile" onClick={isOpen && toggle}>Profile</NavLink>
+                            <NavLink tag={RouteLink} to="/" onClick={toggleLink}>Home</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={RouteLink} to="/contact" onClick={isOpen && toggle}>Contact Us</NavLink>
+                            <NavLink tag={RouteLink} to="/profile" onClick={toggleLink}>Profile</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={RouteLink} to="/submissions" onClick={isOpen && toggle}>Submissions</NavLink>
+                            <NavLink tag={RouteLink} to="/contact" onClick={toggleLink}>Contact Us</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={RouteLink} to="/register" onClick={toggleLink}>Register</NavLink>
+                        </NavItem>
+
+                        <NavItem>
+                            <NavLink tag={RouteLink} to="/submissions" onClick={toggleLink}>Submissions</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={RouteLink} to="/admin" onClick={toggleLink}>Admin</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>
-                <NavbarBrand href="">
-                </NavbarBrand>
+                <NavbarBrand href=""></NavbarBrand>
             </Container>
         </Navbar >
     )

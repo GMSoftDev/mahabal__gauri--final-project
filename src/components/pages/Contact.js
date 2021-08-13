@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
-import { Form, FormGroup, Row, Col, Input, Label, Button, Container, CardBody, Card, CardText } from 'reactstrap'
+import { useHistory } from 'react-router-dom'
+import { Form, FormGroup, Row, Col, Input, Label, Button, Container, CardBody, Card, CardText, CardTitle } from 'reactstrap'
 
 
 
 const Contact = () => {
+    const [contact, setState] = useState({ name: "", email: "", phoneNumber: "", content: "" })
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [content, setContent] = useState("")
 
+    const history = useHistory()
+
     const formSubmit = async event => {
-        event.preventDefault()
-        const response = await fetch('http://localhost:4000/contact_form/entries', {
+        event.preventDefault();
+        const response = await fetch('http://localhost:3001/contact_form/entries/add', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -24,6 +28,12 @@ const Contact = () => {
             alert(`Oops! Error: ${payload.message} for fields: ${payload.invalid.join(",")}`)
         } else {
             alert(`Congrats! Submission submitted with id: ${payload.id}`)
+            setName("")
+            setEmail("")
+            setPhoneNumber("")
+            setContent("");
+            history.push("/contact")
+
         }
     }
 
@@ -56,7 +66,7 @@ const Contact = () => {
                 <FormGroup row className="mb-2">
                     <Label for="messageEntry" sm={2}>Message</Label>
                     <Col sm={10}>
-                        <Input type="textarea" name="text" id="messageEntry" required classname="sm" value={content} onChange={e => setContent(e.target.value)} />
+                        <Input type="textarea" name="text" id="messageEntry" required className="sm" value={content} onChange={e => setContent(e.target.value)} />
                     </Col>
                 </FormGroup>
                 <FormGroup check row>
@@ -67,8 +77,17 @@ const Contact = () => {
                 </FormGroup>
             </Form>
             <Row>
-
+                <p></p>
             </Row>
+            <Card className="text-white bg-primary my-2 py-1 text-center">
+                <CardBody>
+                    <CardTitle>We can also be reached at</CardTitle>
+                    <CardText className="text-white m-0">
+                        <p>Address:1 Bay Street,Toronto,ON</p>
+                        <p>Phone:647-999-999</p>
+                    </CardText>
+                </CardBody>
+            </Card>
         </Container >
     )
 }
